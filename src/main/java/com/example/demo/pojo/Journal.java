@@ -4,16 +4,17 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "journal_info")
 @ExcelTarget(value = "JournalId")
-public class Journal {
+public class Journal implements Serializable {
 
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @javax.persistence.Id
     @Column(name = "journal_id")
-    private long journalId;  //日志Id
+    private long journalId;  //我的一个测试
 
     @Column(name = "journal_message", length = 1000)
     @Excel(name = "日志信息", width = 120)
