@@ -15,7 +15,7 @@ public class ChartsValue {
     private String name; //表格的信息
 
     @Column(name = "value")
-    private int value;
+    private int value; //表格的数据和值
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private ChartsTitle chartsTitle;
