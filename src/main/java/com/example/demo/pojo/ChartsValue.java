@@ -12,7 +12,7 @@ public class ChartsValue {
     private long chartsValueId; //Id
 
     @Column(name = "value_name")
-    private String name;
+    private String name; //表格的信息
 
     @Column(name = "value")
     private int value;
