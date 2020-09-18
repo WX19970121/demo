@@ -26,7 +26,7 @@ import java.util.List;
 public class directorycontroller {
 
     @Autowired
-    private primaryDirectoryMapper primaryDirectoryMapper;
+    private primaryDirectoryMapper primaryDirectoryMapper; //我的世界
 
     @Autowired
     private secondaryDirectoryMapper secondaryDirectoryMapper;
