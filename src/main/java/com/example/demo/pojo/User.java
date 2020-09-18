@@ -35,7 +35,7 @@ public class User implements Serializable {
 
     @Column(name = "user_headimg_path")
     @Excel(name = "用户头像", type = 2 ,width = 40, height = 50, imageType = 1)
-    private String userHeadImgPath; //用户头像地址
+    private String userHeadImgPath; //我们的图像名称
 
     @Column(name = "user_autograph")
     @Excel(name = "用户签名", width = 35)
