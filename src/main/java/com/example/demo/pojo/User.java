@@ -31,7 +31,7 @@ public class User implements Serializable {
 
     @Column(name = "user_headimg")
     @ExcelIgnore
-    private String userHeadImg;  //用户头像
+    private String userHeadImg;  //用户的头像图片名称
 
     @Column(name = "user_headimg_path")
     @Excel(name = "用户头像", type = 2 ,width = 40, height = 50, imageType = 1)
