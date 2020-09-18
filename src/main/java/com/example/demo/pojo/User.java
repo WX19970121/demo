@@ -23,7 +23,7 @@ public class User implements Serializable {
 
     @Column(name = "user_phone")
     @Excel(name = "用户手机号", width = 35)
-    private String userPhone;  //用户手机号12234
+    private String userPhone;  //我们的时间
 
     @Column(name = "user_weixin")
     @Excel(name = "用户微信", width = 35)
