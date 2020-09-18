@@ -15,7 +15,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @javax.persistence.Id
     @Column(name = "user_id")
-    private long Id; //用户Id
+    private long Id; //用户Id123
 
     @Column(name = "user_name")
     @Excel(name = "用户姓名", width = 35)
