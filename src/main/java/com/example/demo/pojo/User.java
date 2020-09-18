@@ -19,11 +19,11 @@ public class User implements Serializable {
 
     @Column(name = "user_name")
     @Excel(name = "用户姓名", width = 35)
-    private String userName;  //用户名
+    private String userName;  //用户名123456
 
     @Column(name = "user_phone")
     @Excel(name = "用户手机号", width = 35)
-    private String userPhone;  //用户手机号
+    private String userPhone;  //用户手机号12234
 
     @Column(name = "user_weixin")
     @Excel(name = "用户微信", width = 35)
