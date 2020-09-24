@@ -7,14 +7,13 @@ import cn.afterturn.easypoi.word.WordExportUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.ESMapper.TestMapper;
-import com.example.demo.mapper.chartstitleMapper;
-import com.example.demo.mapper.chartsvalueMapper;
-import com.example.demo.mapper.primaryDirectoryMapper;
-import com.example.demo.mapper.userMapper;
+import com.example.demo.dao.YZMCode;
+import com.example.demo.mapper.*;
 import com.example.demo.pojo.*;
 import org.apache.http.HttpHost;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -69,6 +68,12 @@ public class test {
 
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
+
+    @Autowired
+    private YZMCode yzmCode;
+
+    @Autowired
+    private adminMapper adminMapper;
 
     @RequestMapping("/ASD")
     public void Test(HttpServletResponse response) throws IOException {
@@ -144,7 +149,7 @@ public class test {
         return B.toString();
     }
 
-    @RequestMapping("/ADDES")
+    @RequestMapping("/ESHighlightBuilder")
     @ResponseBody
     public String TestRedis() throws IOException {
         RestClientBuilder builder = RestClient.builder(new HttpHost("127.0.0.1", 9200));
@@ -185,6 +190,27 @@ public class test {
         HighlightField O = B.get("messInfo");
 
         return O.fragments()[0].toString();
+    }
+
+    @RequestMapping("/ShiroAddAdmin")
+    @ResponseBody
+    public String ShiroAddAdmin(){
+        String Salt = yzmCode.GetRandomNum(4);
+        String userName = "MyTest1234";
+
+        String pass = "ad1092315";
+        Md5Hash md5Hash = new Md5Hash(pass, Salt, 1024);
+
+        String FinalPass = md5Hash.toHex();
+
+        AdminUser adminUser = new AdminUser();
+        adminUser.setAdminName(userName);
+        adminUser.setAdminPassword(FinalPass);
+        adminUser.setAdminSalt(Salt);
+
+        adminMapper.save(adminUser);
+
+        return FinalPass + "</br>" + Salt;
     }
 
 }

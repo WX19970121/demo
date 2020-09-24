@@ -3,6 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.dao.YZMCode;
 import com.example.demo.dao.loginDao;
 import com.example.demo.pojo.AdminUser;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +45,9 @@ public class logincontroller {
                               HttpServletRequest request){
         String Code = (String) request.getSession().getAttribute("YZMCode");
 
+        System.out.println(username);
+        System.out.println(password);
+
         if(!Code.toLowerCase().equals(enCode.toLowerCase())){
             modelAndView.addObject("username", username);
             modelAndView.addObject("password", password);
@@ -54,14 +61,23 @@ public class logincontroller {
                 modelAndView.setViewName("login/login");
             }
             else{
-                if(password.equals(queryLoginAdmin.getAdminPassword())){
-                    request.getSession().setAttribute("adminUser", queryLoginAdmin);
-                    modelAndView.setViewName("redirect:/mainpage/openpage");
-                }
-                else {
+                Subject subject = SecurityUtils.getSubject();
+                UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(queryLoginAdmin.getAdminName(), password);
+                try {
+                    subject.login(usernamePasswordToken);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    subject.logout();
+
                     modelAndView.addObject("username", username);
                     modelAndView.addObject("password", password);
                     modelAndView.setViewName("login/login");
+
+                    return modelAndView;
+                }
+
+                if(subject.isAuthenticated()){
+                    modelAndView.setViewName("redirect:/mainpage/openpage");
                 }
             }
         }

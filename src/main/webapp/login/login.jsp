@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<!doctype html>
+<html lang="en">
 <head>
 
     <meta charset="utf-8">
@@ -25,7 +27,6 @@
     <script src="${path}/login/assets/js/jquery.validate.min.js"></script>
 
 </head>
-
 <body>
 
 <!-- Top content -->
@@ -55,7 +56,7 @@
                         </div>
                     </div>
                     <div class="form-bottom" style="width: 450px">
-                        <form role="form" action="/login/loginaction" method="post" class="login-form" id="loginForm">
+                        <form role="form" action="${path}/login/loginaction" method="post" class="login-form" id="loginForm">
                             <span id="msgDiv"></span>
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Username</label>

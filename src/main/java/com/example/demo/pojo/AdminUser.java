@@ -1,6 +1,7 @@
 package com.example.demo.pojo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "admin_user")
@@ -16,6 +17,12 @@ public class AdminUser {
 
     @Column(name = "admin_password")
     private String adminPassword;  //管理员密码
+
+    @Column(name = "admin_salt")
+    private String adminSalt;  //管理员盐值
+
+    @OneToMany(mappedBy="adminUser", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    private List<AdminRole> adminRoleList; //用户包含的角色
 
     public long getId() {
         return Id;
@@ -39,5 +46,21 @@ public class AdminUser {
 
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
+    }
+
+    public String getAdminSalt() {
+        return adminSalt;
+    }
+
+    public void setAdminSalt(String adminSalt) {
+        this.adminSalt = adminSalt;
+    }
+
+    public List<AdminRole> getAdminRoleList() {
+        return adminRoleList;
+    }
+
+    public void setAdminRoleList(List<AdminRole> adminRoleList) {
+        this.adminRoleList = adminRoleList;
     }
 }

@@ -90,7 +90,7 @@
 
         function GetUserDisInfo() {
             $.ajax({
-                url: '/Echarts/UserDistributionCharts',
+                url: '${path}/Echarts/UserDistributionCharts',
                 type: 'post',
                 dataType: 'json',
                 success: function (result) {

@@ -14,6 +14,11 @@ public class maincontroller {
         return modelAndView;
     }
 
-
-
+    //错误提示页面
+    @RequestMapping("/error")
+    public ModelAndView errorpage(ModelAndView modelAndView){
+        modelAndView.setViewName("main/Error");
+        return modelAndView;
+    }
+    
 }
